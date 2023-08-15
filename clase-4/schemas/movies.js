@@ -1,18 +1,19 @@
-const z = require("zod");
+import { object as _object, string, number, array } from "zod";
+import { z } from "zod";
 
-const movieSchema = z.object({
-  title: z.string({
+const movieSchema = _object({
+  title: string({
     invalid_type_error: "Title must be a string",
     required_error: "Title is required",
   }),
-  year: z.number().int().min(1888).max(2024),
-  director: z.string(),
-  duration: z.number().int().positive(),
-  rate: z.number().min(0).max(10).default(5),
-  poster: z.string().url({
+  year: number().int().min(1888).max(2024),
+  director: string(),
+  duration: number().int().positive(),
+  rate: number().min(0).max(10).default(5),
+  poster: string().url({
     message: "Poster must be a valid URL",
   }),
-  genre: z.array(
+  genre: array(
     z.enum(["Action", "Comedy", "Drama", "Horror", "Thriller", "Crime"]),
     {
       required_error: "Genre is required",
@@ -21,17 +22,12 @@ const movieSchema = z.object({
   ),
 });
 
-function validateMovie(object) {
+export function validateMovie(object) {
   return movieSchema.safeParse(object);
 }
 
-function validatePartialMovie(object) {
-    // partial() permite que el objeto no tenga todas las propiedades
-    // y las hace opcionales
+export function validatePartialMovie(object) {
+  // partial() permite que el objeto no tenga todas las propiedades
+  // y las hace opcionales
   return movieSchema.partial().safeParse(object);
 }
-
-module.exports = {
-  validateMovie,
-  validatePartialMovie
-};
