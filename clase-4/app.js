@@ -6,11 +6,9 @@ import { corsMiddleware } from "./middlewares/cors.js";
 // import fs from "node:fs";
 // const movies = JSON.parse(fs.readFileSync("./movies.json", "utf-8"));
 
-const movies = readJSON("./movies.json");
-
 const app = express();
 app.use(json());
-app.use(corsMiddleware(acceptedOrigins));
+app.use(corsMiddleware());
 app.disable("x-powered-by"); // deshabilitar el header X-Powered-By: Express
 
 // métodos normales: GET/HEAD/POST
