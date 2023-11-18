@@ -10,7 +10,9 @@ const DEFAULT_CONFIG = {
 
 const connectionString = process.env.DATABASE_URL ?? DEFAULT_CONFIG;
 
-const connection = await mysql.createConnection(connectionString);
+const connection = await mysql.createConnection(DEFAULT_CONFIG);
+
+console.log(connectionString);
 
 export class MovieModel {
   static async getAll({ genre }) {

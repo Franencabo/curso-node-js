@@ -1,10 +1,10 @@
 // import { this.movieModel } from '../models/local-file-system/movie.js'
-// import { MovieModel } from "../models/mysql/movies.js";
+//import { MovieModel } from "../models/mysql/movies.js";
 import { validateMovie, validatePartialMovie } from "../schemas/movies.js";
 
 export class MovieController {
-  constructor({ movieModel }) {
-    this.movieModel = movieModel;
+  constructor({ MovieModel }) {
+    this.movieModel = MovieModel;
   }
   getAll = async (req, res) => {
     const { genre } = req.query;
